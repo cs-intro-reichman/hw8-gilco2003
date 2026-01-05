@@ -72,7 +72,9 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         User user1 = getUser(name1), user2 = getUser(name2);
-        if(!isRegistered(user1) || !isRegistered(user2) || user1.follows(name2))
+        if(user1 ==  null || user2 == null)
+            return false;
+        if(!isRegistered(user1) || !isRegistered(user2) || user1.follows(name2) || name1.equals(name2))
             return false;
         int index1 = getIndex(name1);
         return users[index1].addFollowee(name2);        
