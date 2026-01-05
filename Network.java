@@ -22,7 +22,7 @@ public class Network {
         users[1] = new User("Bar");
         users[2] = new User("Baz");
         userCount = 3;
-        this.maxUserCount =userCount;
+        this.maxUserCount =maxUserCount;
     }
 
     public int getUserCount() {
