@@ -71,7 +71,7 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        User user1 = new User(name1), user2 = new User(name2);
+        User user1 = getUser(name1), user2 = getUser(name2);
         if(!isRegistered(user1) || !isRegistered(user2) || user1.follows(name2))
             return false;
         int index1 = getIndex(name1);
@@ -86,7 +86,7 @@ public class Network {
         User user = getUser(name);
         String userToFollow = null;
         for(int i = 0; i < userCount; i++){
-            if(i != index && user.countMutual(users[i]) > max){
+            if(i != index && user.countMutual(users[i]) > max && !user.follows(users[i].getName()) ){
                 max = user.countMutual(users[i]);
                 userToFollow =users[i].getName();
             }
@@ -105,7 +105,6 @@ public class Network {
     /** Computes and returns the name of the most popular user in this network: 
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
-        int[] followersCount = new int[userCount];
         int max =0;
         String mostPop = null;
         for(int i = 0; i < userCount; i++){
